@@ -8,6 +8,10 @@
 // Protect from unauthorized access
 defined('_JEXEC') or die();
 
+// Import Joomla file system class
+jimport('joomla.filesystem.folder');
+jimport('joomla.filesystem.file');
+
 /**
  * Expert Extension Framework (XEF) helper class
  *
@@ -197,9 +201,6 @@ abstract class XEFUtility
 
     public static function getResizedImage( $path, $dimensions = array(), $module, $append= '')
     {
-
-        jimport('joomla.filesystem.folder');
-        jimport('joomla.filesystem.file');
 
         if( !file_exists($path) ) return ;
 

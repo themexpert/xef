@@ -34,12 +34,16 @@ class XEFHelper
         $this->module       = $module;
         $this->params       = $params;
 
-        if ( version_compare(JVERSION, '2.5', 'ge') && version_compare(JVERSION, '3.0', 'lt') )
+        if( !defined('XEF_JVERSION') )
         {
-            define('XEF_JVERSION', '25');
-        }else{
-            define('XEF_JVERSION', '30');
+            if ( version_compare(JVERSION, '2.5', 'ge') && version_compare(JVERSION, '3.0', 'lt') )
+            {
+                define('XEF_JVERSION', '25');
+            }else{
+                define('XEF_JVERSION', '30');
+            }
         }
+
 
     }
 
@@ -126,7 +130,10 @@ class XEFHelper
             );
 
             //Take advantage from joomla default Intro image system
-            $images = json_decode($item->images);
+            if( isset($item->images) )
+            {
+                $images = json_decode($item->images);
+            }
 
             if( isset($images->image_intro) and !empty($images->image_intro) )
             {
@@ -137,7 +144,8 @@ class XEFHelper
                 $item->image = XEFUtility::getImage($item->introtext);
             }
 
-            if( $this->get('navigation') == 'thumb' )
+            if( $this->get('navigation') == 'thumb' OR
+                $this->get('thumb') )
             {
 
                 $thumb_dimensions = array(
