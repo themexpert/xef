@@ -188,6 +188,13 @@ jQuery(document).ready(function(fn){
         fn('a[href="#options-EASYBLOG"]').closest('li').hide();
         fn('a[href="#options-FLICKR"]').closest('li').hide();
         fn('a[href="#options-YOUTUBE"]').closest('li').hide();
+
+        // Advance module manager tab layout fix
+        fn('.tab-JOOMLA').show();
+        fn('.tab-K2').hide();
+        fn('.tab-EASYBLOG').hide();
+        fn('.tab-FLICKR').hide();
+        fn('.tab-YOUTUBE').hide();
     }
     function showK2()
     {
@@ -196,12 +203,20 @@ jQuery(document).ready(function(fn){
         fn('#EASYBLOG-options').closest('div.panel').hide();
         fn('#FLICKR-options').closest('div.panel').hide();
         fn('#YOUTUBE-options').closest('div.panel').hide();
-         //j3 fix
+
+        //j3 fix
         fn('a[href="#options-JOOMLA"]').closest('li').hide();
         fn('a[href="#options-K2"]').closest('li').show();
         fn('a[href="#options-EASYBLOG"]').closest('li').hide();
         fn('a[href="#options-FLICKR"]').closest('li').hide();
         fn('a[href="#options-YOUTUBE"]').closest('li').hide();
+
+        // Advance module manager tab layout fix
+        fn('.tab-JOOMLA').hide();
+        fn('.tab-K2').show();
+        fn('.tab-EASYBLOG').hide();
+        fn('.tab-FLICKR').hide();
+        fn('.tab-YOUTUBE').hide();
     }
     function showEasyblog()
     {
@@ -210,12 +225,20 @@ jQuery(document).ready(function(fn){
         fn('#EASYBLOG-options').closest('div.panel').show();
         fn('#FLICKR-options').closest('div.panel').hide();
         fn('#YOUTUBE-options').closest('div.panel').hide();
-         //j3 fix
+
+        //j3 fix
         fn('a[href="#options-JOOMLA"]').closest('li').hide();
         fn('a[href="#options-K2"]').closest('li').hide();
         fn('a[href="#options-EASYBLOG"]').closest('li').show();
         fn('a[href="#options-FLICKR"]').closest('li').hide();
         fn('a[href="#options-YOUTUBE"]').closest('li').hide();
+
+        // Advance module manager tab layout fix
+        fn('.tab-JOOMLA').hide();
+        fn('.tab-K2').hide();
+        fn('.tab-EASYBLOG').show();
+        fn('.tab-FLICKR').hide();
+        fn('.tab-YOUTUBE').hide();
     }
     function showFlickr()
     {
@@ -224,12 +247,20 @@ jQuery(document).ready(function(fn){
         fn('#EASYBLOG-options').closest('div.panel').hide();
         fn('#FLICKR-options').closest('div.panel').show();
         fn('#YOUTUBE-options').closest('div.panel').hide();
-         //j3 fix
+
+        //j3 fix
         fn('a[href="#options-JOOMLA"]').closest('li').hide();
         fn('a[href="#options-K2"]').closest('li').hide();
         fn('a[href="#options-EASYBLOG"]').closest('li').hide();
         fn('a[href="#options-FLICKR"]').closest('li').show();
         fn('a[href="#options-YOUTUBE"]').closest('li').hide();
+
+        // Advance module manager tab layout fix
+        fn('.tab-JOOMLA').hide();
+        fn('.tab-K2').hide();
+        fn('.tab-EASYBLOG').hide();
+        fn('.tab-FLICKR').show();
+        fn('.tab-YOUTUBE').hide();
     }
     function showYoutube()
     {
@@ -238,12 +269,20 @@ jQuery(document).ready(function(fn){
         fn('#EASYBLOG-options').closest('div.panel').hide();
         fn('#FLICKR-options').closest('div.panel').hide();
         fn('#YOUTUBE-options').closest('div.panel').show();
-         //j3 fix
+
+        //j3 fix
         fn('a[href="#options-JOOMLA"]').closest('li').hide();
         fn('a[href="#options-K2"]').closest('li').hide();
         fn('a[href="#options-EASYBLOG"]').closest('li').hide();
         fn('a[href="#options-FLICKR"]').closest('li').hide();
         fn('a[href="#options-YOUTUBE"]').closest('li').show();
+
+        // Advance module manager tab layout fix
+        fn('.tab-JOOMLA').hide();
+        fn('.tab-K2').hide();
+        fn('.tab-EASYBLOG').hide();
+        fn('.tab-FLICKR').hide();
+        fn('.tab-YOUTUBE').show();
     }
 
     // Content source select and push to joomla input field related to it
