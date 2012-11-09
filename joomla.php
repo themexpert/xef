@@ -22,7 +22,6 @@ class XEFJoomla extends XEFHelper
 
         require_once JPATH_SITE.'/components/com_content/helpers/route.php';
         jimport('joomla.application.component.model');
-        //JModel::addIncludePath(JPATH_SITE.'/components/com_content/models');
 
         $app = JFactory::getApplication('site', array(), 'J');
 
@@ -32,8 +31,12 @@ class XEFJoomla extends XEFHelper
         // Get an instance of the generic articles model
         if(XEF_JVERSION == '25')
         {
+            JModel::addIncludePath(JPATH_SITE.'/components/com_content/models');
             $model = JModel::getInstance('Articles', 'ContentModel', array('ignore_request' => true));
+
         }else{
+
+            JModelLegacy::addIncludePath(JPATH_SITE.'/components/com_content/models');
             $model = JModelLegacy::getInstance('Articles', 'ContentModel', array('ignore_request' => true));
         }
 

@@ -254,8 +254,8 @@ abstract class XEFUtility
         $doc        = JFactory::getDocument();
         $app        = JApplication::getInstance('site', array(), 'J');
         $template   = $app->getTemplate();
-        $mod_url    = JURI::root(true) . '/modules/' . $module->module . '/assets/css';
-        $tmpl_url   = JURI::root(true) . '/templates/' . $template . '/css';
+        $mod_url    = 'modules/' . $module->module . '/assets/css';
+        $tmpl_url   = 'templates/' . $template . '/css';
         $ext        = '.css';
 
         // If sub style is available then we'll check for that css file
