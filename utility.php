@@ -138,8 +138,8 @@ abstract class XEFUtility
     {
         if ( file_exists( JPATH_SITE . '/media/k2/items/cache/' . md5("Image".$id) . '_L.jpg' ) )
         {
+
             $image_path = 'media/k2/items/cache/'.md5("Image".$id).'_L.jpg';
-            $image_path = JURI::Root(true).'/'.$image_path;
 
             return $image_path;
 
@@ -201,9 +201,7 @@ abstract class XEFUtility
 
     public static function getResizedImage( $path, $dimensions = array(), $module, $append= '')
     {
-
         if( !file_exists($path) ) return ;
-
 
         if(!class_exists('XpertThumb')){
             include_once 'libs/xpertthumb.php';

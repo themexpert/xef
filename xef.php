@@ -129,19 +129,26 @@ class XEFHelper
                 'height' => $this->get('image_height',300)
             );
 
-            //Take advantage from joomla default Intro image system
-            if( isset($item->images) )
+            // Get image depend on the content source
+            if( $source == 'joomla' )
             {
-                $images = json_decode($item->images);
-            }
+                //Take advantage from joomla default Intro image system
+                if( isset($item->images) )
+                {
+                    $images = json_decode($item->images);
+                }
 
-            if( isset($images->image_intro) and !empty($images->image_intro) )
+                if( isset($images->image_intro) and !empty($images->image_intro) )
+                {
+                    $item->image = $images->image_intro;
+
+                }else{
+                    //get image from article intro text
+                    $item->image = XEFUtility::getImage($item->introtext);
+                }
+            }elseif($source == 'k2')
             {
-                $item->image = $images->image_intro;
-
-            }else{
-                //get image from article intro text
-                $item->image = XEFUtility::getImage($item->introtext);
+                $item->image = XEFUtility::getK2Images($item->id, $item->title, $item->introtext);
             }
 
             if( $this->get('navigation') == 'thumb' OR
