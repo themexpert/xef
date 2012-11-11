@@ -11,18 +11,15 @@ defined('_JEXEC') or die();
 // Require XEF helper class
 require_once 'xef.php';
 
-// Require the utility class
-require_once 'utility.php';
+// Require Content router
+require_once JPATH_SITE.'/components/com_content/helpers/route.php';
 
 class XEFJoomla extends XEFHelper
 {
 
     public function getItems()
     {
-
-        require_once JPATH_SITE.'/components/com_content/helpers/route.php';
         jimport('joomla.application.component.model');
-
         $app = JFactory::getApplication('site', array(), 'J');
 
         // Get the dbo
@@ -125,5 +122,58 @@ class XEFJoomla extends XEFHelper
         //XEFUtility::debug($catid);
 
        return $items;
+    }
+
+    public function getLink($item)
+    {
+        $access = !JComponentHelper::getParams('com_content')->get('show_noauth');
+        $authorised = JAccess::getAuthorisedViewLevels(JFactory::getUser()->get('id'));
+
+        $link = '';
+
+        $item->slug = $item->id.':'.$item->alias;
+        $item->catslug = $item->catid.':'.$item->category_alias;
+
+        if ($access || in_array($item->access, $authorised))
+        {
+            // We know that user has the privilege to view the article
+            $link = JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catslug));
+        }
+        else {
+            $link = JRoute::_('index.php?option=com_users&view=login');
+        }
+
+        return $link;
+    }
+
+    public function getCategory($item)
+    {
+        return $item->category_title;
+    }
+
+    public function getCategoryLink($item)
+    {
+        return JRoute::_(ContentHelperRoute::getCategoryRoute($item->catid));
+    }
+
+    public function getImage($item)
+    {
+        $path = '';
+        //Take advantage from joomla default Intro image system
+        if( isset($item->images) )
+        {
+            $images = json_decode($item->images);
+        }
+
+        if( isset($images->image_intro) and !empty($images->image_intro) )
+        {
+            $path = $images->image_intro;
+
+        }else{
+            //get image from article intro text
+            $path = XEFUtility::getImage($item->introtext);
+        }
+
+        return $path;
     }
 }

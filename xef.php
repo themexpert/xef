@@ -87,70 +87,30 @@ class XEFHelper
      **/
     public function prepareItems($items)
     {
-        $access = !JComponentHelper::getParams('com_content')->get('show_noauth');
-        $authorised = JAccess::getAuthorisedViewLevels(JFactory::getUser()->get('id'));
-
-        $source = $this->get('content_source');
+        //$source = $this->get('content_source');
 
         foreach ($items as $item)
         {
-            if( $source == 'joomla' )
-            {
-                $item->slug = $item->id.':'.$item->alias;
-                $item->catslug = $item->catid.':'.$item->category_alias;
-
-                if ($access || in_array($item->access, $authorised))
-                {
-                        // We know that user has the privilege to view the article
-                        $item->link = JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catslug));
-                }
-                else {
-                        $item->link = JRoute::_('index.php?option=com_users&view=login');
-                }
-                // category name & link
-                $item->catname = $item->category_title;
-                $item->catlink = JRoute::_(ContentHelperRoute::getCategoryRoute($item->catid));
-
-            }elseif($source == 'k2')
-            {
-                $item->link = urldecode(JRoute::_(K2HelperRoute::getItemRoute($item->id.':'.urlencode($item->alias), $item->catid.':'.urlencode($item->categoryalias))));
-
-                // category name & link
-                $item->catname = $item->categoryname;
-                $item->catlink = urldecode(JRoute::_(K2HelperRoute::getCategoryRoute($item->catid.':'.urlencode($item->categoryalias))));
-
-            }
-
-            //Clean title
+            // Clean title
             $item->title = JFilterOutput::ampReplace($item->title);
 
+            // Category name & link
+            $item->catname = $this->getCategory($item);
+            $item->catlink = $this->getCategoryLink($item);
+
+            // Link
+            $item->link = $this->getLink($item);
+
+            // Image
+            $item->image = $this->getImage($item);
+
+            // Set image dimension
             $dimensions = array(
                 'width'  => $this->get('image_width',400),
                 'height' => $this->get('image_height',300)
             );
 
-            // Get image depend on the content source
-            if( $source == 'joomla' )
-            {
-                //Take advantage from joomla default Intro image system
-                if( isset($item->images) )
-                {
-                    $images = json_decode($item->images);
-                }
-
-                if( isset($images->image_intro) and !empty($images->image_intro) )
-                {
-                    $item->image = $images->image_intro;
-
-                }else{
-                    //get image from article intro text
-                    $item->image = XEFUtility::getImage($item->introtext);
-                }
-            }elseif($source == 'k2')
-            {
-                $item->image = XEFUtility::getK2Images($item->id, $item->title, $item->introtext);
-            }
-
+            // If thumbnail is enable set its property
             if( $this->get('navigation') == 'thumb' OR
                 $this->get('thumb') )
             {
@@ -162,20 +122,21 @@ class XEFHelper
                 $item->thumb = XEFUtility::getResizedImage($item->image, $thumb_dimensions, $this->module, '_thumb');
             }
 
+            // Finally re-sized image according to dimension
             $item->image = XEFUtility::getResizedImage($item->image, $dimensions, $this->module);
 
-            //Intro text
-            $limit_type = $this->get('intro_limit_type');
+            // Intro text
+            $filter_by = $this->get('intro_limit_type');
 
-            if( $limit_type == 'words' )
+            // Trim intro text based on filter type
+            if( $filter_by == 'words' )
             {
                 $item->introtext = XEFUtility::wordLimit($item->introtext, $this->get('intro_limit',100) );
 
-            }elseif($limit_type == 'chars')
+            }elseif($filter_by == 'chars')
             {
                 $item->introtext = XEFUtility::characterLimit($item->introtext, $this->get('intro_limit',100) );
             }
-
         }
 
         return $items;

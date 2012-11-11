@@ -11,9 +11,6 @@ defined('_JEXEC') or die();
 // Require XEF helper class
 require_once 'xef.php';
 
-// Require the utility class
-require_once 'utility.php';
-
 require_once(JPATH_SITE.DS.'components'.DS.'com_k2'.DS.'helpers'.DS.'route.php');
 require_once(JPATH_SITE.DS.'components'.DS.'com_k2'.DS.'helpers'.DS.'utilities.php');
 
@@ -22,8 +19,6 @@ class XEFK2 extends XEFHelper
 
     public function getItems()
     {
-
-
         jimport('joomla.filesystem.file');
 
         $app = JFactory::getApplication('site', array(), 'J');
@@ -40,9 +35,6 @@ class XEFK2 extends XEFHelper
         $jnow = JFactory::getDate();
         $now = $jnow->toSQL();
         $nullDate = $db->getNullDate();
-
-        //Authorised
-        $authorised = JAccess::getAuthorisedViewLevels(JFactory::getUser()->get('id'));
 
         $query = "SELECT i.*, CASE WHEN i.modified = 0 THEN i.created ELSE i.modified END as lastChanged, c.name AS categoryname,c.id AS categoryid, c.alias AS categoryalias, c.params AS categoryparams";
 
@@ -194,4 +186,24 @@ class XEFK2 extends XEFHelper
 
         return $items;
         }
+
+    public function getLink($item)
+    {
+        return urldecode(JRoute::_(K2HelperRoute::getItemRoute($item->id.':'.urlencode($item->alias), $item->catid.':'.urlencode($item->categoryalias))));
+    }
+
+    public function getCategory($item)
+    {
+        return $item->categoryname;
+    }
+
+    public function getCategoryLink($item)
+    {
+        return urldecode(JRoute::_(K2HelperRoute::getCategoryRoute($item->catid.':'.urlencode($item->categoryalias))));
+    }
+
+    public function getImage($item)
+    {
+        return XEFUtility::getK2Images($item->id, $item->title, $item->introtext);
+    }
 }
