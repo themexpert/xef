@@ -20,7 +20,7 @@ class JFormFieldSpacer extends JFormField{
     protected $type = 'Spacer';
 
     protected function getInput(){
-        return '';
+        return ;
     }
 
     protected function getLabel(){

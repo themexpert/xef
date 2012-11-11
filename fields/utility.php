@@ -27,7 +27,7 @@ class JFormFieldUtility extends JFormField{
         $path_js    = JURI::root(true) . '/libraries/xef/assets/js';
 
         //load all CSS first
-        $doc->addStyleSheet($path_css .'/jquery-ui-1.8.16.custom.css');
+        //$doc->addStyleSheet($path_css .'/jquery-ui-1.8.16.custom.css');
         $doc->addStyleSheet($path_css .'/bootstrap.css');
 
         //load jquery and plugins
