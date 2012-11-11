@@ -21,11 +21,11 @@ if( file_exists(JPATH_SITE.DS."components".DS."com_k2".DS."k2.php") )
         var	$type = 'categoriesmultiple';
 
         function getInput(){
-            $params = &JComponentHelper::getParams('com_k2');
+            $params = JComponentHelper::getParams('com_k2');
 
-            $document = &JFactory::getDocument();
+            $document = JFactory::getDocument();
 
-            $db = &JFactory::getDBO();
+            $db = JFactory::getDBO();
             $query = 'SELECT m.* FROM #__k2_categories m WHERE published=1 AND trash = 0 ORDER BY parent, ordering';
             $db->setQuery( $query );
             $mitems = $db->loadObjectList();

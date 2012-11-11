@@ -34,8 +34,8 @@ if(file_exists(JPATH_SITE.DS."components".DS."com_easyblog".DS."easyblog.php")){
 
         protected function getInput()
         {
-            $mainframe	=& JFactory::getApplication();
-            $doc 		=& JFactory::getDocument();
+            $mainframe	= JFactory::getApplication();
+            $doc 		= JFactory::getDocument();
 
             require_once( JPATH_ROOT . DS . 'components' . DS . 'com_easyblog' . DS . 'constants.php' );
 
