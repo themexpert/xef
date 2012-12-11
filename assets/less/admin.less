@@ -33,17 +33,13 @@ div.current fieldset.radio label{margin:0 !important;}
 
     }
     .panel:last-child{ border-bottom: solid 1px #ccc !important;}
-    .panel h3{
-      background: transparent !important;
-    }
-    .content{
-      background: #f1f1f1 !important;
-      fieldset { background: transparent !important; border-top: 1px solid #fff;}
-    }
+    .panel h3{}
+    .content{}
 }
-input[type=text]{padding: 2px 4px;}
+input[type=text]{margin: 0;}
 .chzn-container{
   min-width: 280px;
+  max-width: 280px;
   .chzn-drop{ min-width: 280px;}
 }
 //Content Source list
@@ -132,26 +128,26 @@ input[type=text]{padding: 2px 4px;}
 .pre-text{display: block;text-align: left}
 //Spacer
 .spacer.hasText{
-    .gradientBar(#ebebeb, #d8d8d8) ;
-    color: #767676;
+    .gradientBar(#fff, #f5f5f5) ;
+    color: #6d6d6d;
     text-shadow: 1px 1px 1px #fff;
     font-size: 10px;
     font-weight: bold;
-    line-height: 18px;
+    line-height: 24px;
     padding: 0 30px;
     cursor: pointer;
     margin: 15px -20px;
     clear:both;
     text-transform: uppercase;
-    border-top: 1px solid #bab9bb;
-    border-bottom: 1px solid #bab9bb;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
 
     span{
 
     }
 }
 //Field wrap
-.field-wrap{ float: left; min-width: 160px;}
+.field-wrap{ min-width: 160px;}
 .field-wrap.input-mini{max-width: 110px; min-width: 90px;}
 
 //Tooltip

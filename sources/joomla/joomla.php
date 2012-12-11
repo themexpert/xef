@@ -9,12 +9,12 @@
 defined('_JEXEC') or die();
 
 // Require XEF helper class
-require_once 'xef.php';
+require_once JPATH_LIBRARIES . '/xef/xef.php';
 
 // Require Content router
 require_once JPATH_SITE.'/components/com_content/helpers/route.php';
 
-class XEFJoomla extends XEFHelper
+class XEFSourceJoomla extends XEFHelper
 {
 
     public function getItems()
@@ -175,5 +175,10 @@ class XEFJoomla extends XEFHelper
         }
 
         return $path;
+    }
+
+    public function getDate($item)
+    {
+        return JHTML::_('date',$item->created, JText::_('DATE_FORMAT_LC3'));
     }
 }

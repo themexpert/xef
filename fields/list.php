@@ -42,6 +42,8 @@ class JFormFieldList extends JFormField
 		$html = array();
 		$attr = '';
 
+        if (!is_array($this->value)) $this->value = explode(",", preg_replace("/\s/", "", $this->value));
+
 		// Initialize some field attributes.
 		$attr .= $this->element['class'] ? ' class="' . (string) $this->element['class'] . '"' : '';
 
@@ -56,7 +58,7 @@ class JFormFieldList extends JFormField
 
 		// Initialize JavaScript field attributes.
 		$attr .= $this->element['onchange'] ? ' onchange="' . (string) $this->element['onchange'] . '"' : '';
-        $attr .= 'style="width:200px;"';
+        //$attr .= 'style="width:200px;"';
 
 		// Get the field options.
 		$options = (array) $this->getOptions();

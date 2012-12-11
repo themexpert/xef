@@ -54,8 +54,8 @@ abstract class XEFUtility
         $doc = JFactory::getDocument();
         $app = JFactory::getApplication('site', array(), 'J');
 
-        $version = $params->get('jquery_version');
-        $cdn = $params->get('jquery_source');
+        $version = $params->get('jquery_version') ? $params->get('jquery_version') : '1.8.2';
+        $cdn = $params->get('jquery_source') ? $params->get('jquery_source') : 'local';
 
         $xef_url = JURI::root(true) . '/libraries/xef';
         $mod_url = JURI::root(true) . '/modules/' . $module->module;

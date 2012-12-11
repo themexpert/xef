@@ -1,9 +1,17 @@
 <?php
 /**
- *  @package Expert Extension Framework (XEF)
- *  @copyright Copyright (c)2010-2012 ThemeXpert.com
- *  @license GNU General Public License version 3, or later
- **/
+ * XEF - Expert Extension Framework
+ *
+ * An extension development framework for ThemeXpert
+ *
+ * @package		XEF - Expert Extension Framework
+ * @author		ThemeXpert Team
+ * @copyright	Copyright (c) 2010 - 2012, ThemeXpert.
+ * @license		GNU General Public License version 3, or later
+ * @link		http://www.themexpert.com
+ * @since		1.0
+ *
+ */
 
 // Protect from unauthorized access
 defined('_JEXEC') or die();
@@ -33,18 +41,6 @@ class XEFHelper
     {
         $this->module       = $module;
         $this->params       = $params;
-
-        if( !defined('XEF_JVERSION') )
-        {
-            if ( version_compare(JVERSION, '2.5', 'ge') && version_compare(JVERSION, '3.0', 'lt') )
-            {
-                define('XEF_JVERSION', '25');
-            }else{
-                define('XEF_JVERSION', '30');
-            }
-        }
-
-
     }
 
     /*
@@ -104,6 +100,9 @@ class XEFHelper
             // Image
             $item->image = $this->getImage($item);
 
+            // Date
+            $item->date = $this->getDate($item);
+
             // Set image dimension
             $dimensions = array(
                 'width'  => $this->get('image_width',400),
@@ -122,8 +121,12 @@ class XEFHelper
                 $item->thumb = XEFUtility::getResizedImage($item->image, $thumb_dimensions, $this->module, '_thumb');
             }
 
-            // Finally re-sized image according to dimension
-            $item->image = XEFUtility::getResizedImage($item->image, $dimensions, $this->module);
+            // Finally re-sized image if image re-sizer is on
+            if($this->get('image_resize'))
+            {
+                $item->image = XEFUtility::getResizedImage($item->image, $dimensions, $this->module);
+            }
+
 
             // Intro text
             $filter_by = $this->get('intro_limit_type');

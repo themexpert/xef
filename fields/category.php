@@ -59,7 +59,7 @@ class JFormFieldCategory extends JFormField
         // Initialize JavaScript field attributes.
         $attr .= $this->element['onchange'] ? ' onchange="' . (string) $this->element['onchange'] . '"' : '';
 
-        $attr .= 'style="width:280px;"';
+        //$attr .= 'style="width:280px;"';
         $attr .= 'data-placeholder="Click here to select categories"';
 
         // Get the field options.

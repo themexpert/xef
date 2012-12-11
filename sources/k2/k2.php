@@ -9,12 +9,12 @@
 defined('_JEXEC') or die();
 
 // Require XEF helper class
-require_once 'xef.php';
+require_once JPATH_LIBRARIES . '/xef/xef.php';
 
 require_once(JPATH_SITE.DS.'components'.DS.'com_k2'.DS.'helpers'.DS.'route.php');
 require_once(JPATH_SITE.DS.'components'.DS.'com_k2'.DS.'helpers'.DS.'utilities.php');
 
-class XEFK2 extends XEFHelper
+class XEFSourceK2 extends XEFHelper
 {
 
     public function getItems()
@@ -205,5 +205,10 @@ class XEFK2 extends XEFHelper
     public function getImage($item)
     {
         return XEFUtility::getK2Images($item->id, $item->title, $item->introtext);
+    }
+
+    public function getDate($item)
+    {
+        return JHTML::_('date',$item->created, JText::_('DATE_FORMAT_LC3'));
     }
 }

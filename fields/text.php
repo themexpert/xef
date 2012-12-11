@@ -29,18 +29,22 @@ class JFormFieldText extends JFormField
             $readonly	= ((string) $this->element['readonly'] == 'true') ? ' readonly="readonly"' : '';
             $disabled	= ((string) $this->element['disabled'] == 'true') ? ' disabled="disabled"' : '';
             
-            $pretext    = ($this->element['pretext'] != NULL) ? '<span class="pre-text">'. JText::_($this->element['pretext']). '</span>' : '';
+            $prepend    = ($this->element['prepend'] != NULL) ? '<span class="add-on">'. JText::_($this->element['prepend']). '</span>' : '';
 
-            $posttext   = ($this->element['posttext'] != NULL) ? '<span class="add-on">'.JText::_($this->element['posttext']).'</span>' : '';
+            $append   = ($this->element['append'] != NULL) ? '<span class="add-on">'.JText::_($this->element['append']).'</span>' : '';
 
-            $wrapstart  = '<div class="field-wrap clearfix '.$class.'">';
+            if($prepend) $extra_class = 'input-prepend';
+            elseif($append) $extra_class = 'input-append';
+            else $extra_class = '';
+
+            $wrapstart  = '<div class="field-wrap clearfix '.$class. $extra_class .'">';
             $wrapend    = '</div>';
 
             $input = '<input type="text" name="'.$this->name.'" id="'.$this->id.'"' .
                             ' value="'.htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8').'"' .
                             $size.$disabled.$readonly.$maxLength.'/>';
 
-            $output = $wrapstart . $pretext . $input . $posttext . $wrapend;
+            $output = $wrapstart . $prepend . $input . $append . $wrapend;
             return $output;
 	}
 
