@@ -102,6 +102,7 @@ class JFormFieldSource extends JFormField
         {
             switch ($provider){
                 case 'joomla' :
+                case 'module' :
 
                     // Joomla is available for all :D
                     $this->provider_status[$provider] = array('status'=> 1, 'msg'=>'');

@@ -55,6 +55,9 @@ jQuery(document).ready(function(fn){
     //Chosen Multiple selector
     fn(".chzn-select").chosen();
 
+    // For module selecting box, increase the panelform height
+    fn('#MODULE-options').next().find('.panelform').css('min-height', 150);
+
     fn('.cs-list a').popover({
         placement : 'right'
     });
@@ -171,6 +174,7 @@ jQuery(document).ready(function(fn){
             case 'easyblog' : showEasyblog(); break;
             case 'flickr' : showFlickr(); break;
             case 'youtube' : showYoutube(); break;
+            case 'module' : showModule(); break;
         }
     }
     //Show only selected panel and hide others
@@ -181,6 +185,7 @@ jQuery(document).ready(function(fn){
         fn('#EASYBLOG-options').closest('div.panel').hide();
         fn('#FLICKR-options').closest('div.panel').hide();
         fn('#YOUTUBE-options').closest('div.panel').hide();
+        fn('#MODULE-options').closest('div.panel').hide();
 
         //j3 fix
         fn('a[href="#options-JOOMLA"]').closest('li').show();
@@ -188,6 +193,7 @@ jQuery(document).ready(function(fn){
         fn('a[href="#options-EASYBLOG"]').closest('li').hide();
         fn('a[href="#options-FLICKR"]').closest('li').hide();
         fn('a[href="#options-YOUTUBE"]').closest('li').hide();
+        fn('a[href="#options-MODULE"]').closest('li').hide();
 
         // Advance module manager tab layout fix
         fn('.tab-JOOMLA').show();
@@ -195,6 +201,7 @@ jQuery(document).ready(function(fn){
         fn('.tab-EASYBLOG').hide();
         fn('.tab-FLICKR').hide();
         fn('.tab-YOUTUBE').hide();
+        fn('.tab-MODULE').hide();
     }
     function showK2()
     {
@@ -203,6 +210,7 @@ jQuery(document).ready(function(fn){
         fn('#EASYBLOG-options').closest('div.panel').hide();
         fn('#FLICKR-options').closest('div.panel').hide();
         fn('#YOUTUBE-options').closest('div.panel').hide();
+        fn('#MODULE-options').closest('div.panel').hide();
 
         //j3 fix
         fn('a[href="#options-JOOMLA"]').closest('li').hide();
@@ -210,6 +218,7 @@ jQuery(document).ready(function(fn){
         fn('a[href="#options-EASYBLOG"]').closest('li').hide();
         fn('a[href="#options-FLICKR"]').closest('li').hide();
         fn('a[href="#options-YOUTUBE"]').closest('li').hide();
+        fn('a[href="#options-MODULE"]').closest('li').hide();
 
         // Advance module manager tab layout fix
         fn('.tab-JOOMLA').hide();
@@ -217,6 +226,7 @@ jQuery(document).ready(function(fn){
         fn('.tab-EASYBLOG').hide();
         fn('.tab-FLICKR').hide();
         fn('.tab-YOUTUBE').hide();
+        fn('.tab-MODULE').hide();
     }
     function showEasyblog()
     {
@@ -225,6 +235,7 @@ jQuery(document).ready(function(fn){
         fn('#EASYBLOG-options').closest('div.panel').show();
         fn('#FLICKR-options').closest('div.panel').hide();
         fn('#YOUTUBE-options').closest('div.panel').hide();
+        fn('#MODULE-options').closest('div.panel').hide();
 
         //j3 fix
         fn('a[href="#options-JOOMLA"]').closest('li').hide();
@@ -232,6 +243,7 @@ jQuery(document).ready(function(fn){
         fn('a[href="#options-EASYBLOG"]').closest('li').show();
         fn('a[href="#options-FLICKR"]').closest('li').hide();
         fn('a[href="#options-YOUTUBE"]').closest('li').hide();
+        fn('a[href="#options-MODULE"]').closest('li').hide();
 
         // Advance module manager tab layout fix
         fn('.tab-JOOMLA').hide();
@@ -239,6 +251,7 @@ jQuery(document).ready(function(fn){
         fn('.tab-EASYBLOG').show();
         fn('.tab-FLICKR').hide();
         fn('.tab-YOUTUBE').hide();
+        fn('.tab-MODULE').hide();
     }
     function showFlickr()
     {
@@ -247,6 +260,7 @@ jQuery(document).ready(function(fn){
         fn('#EASYBLOG-options').closest('div.panel').hide();
         fn('#FLICKR-options').closest('div.panel').show();
         fn('#YOUTUBE-options').closest('div.panel').hide();
+        fn('#MODULE-options').closest('div.panel').hide();
 
         //j3 fix
         fn('a[href="#options-JOOMLA"]').closest('li').hide();
@@ -254,6 +268,7 @@ jQuery(document).ready(function(fn){
         fn('a[href="#options-EASYBLOG"]').closest('li').hide();
         fn('a[href="#options-FLICKR"]').closest('li').show();
         fn('a[href="#options-YOUTUBE"]').closest('li').hide();
+        fn('a[href="#options-MODULE"]').closest('li').hide();
 
         // Advance module manager tab layout fix
         fn('.tab-JOOMLA').hide();
@@ -261,6 +276,7 @@ jQuery(document).ready(function(fn){
         fn('.tab-EASYBLOG').hide();
         fn('.tab-FLICKR').show();
         fn('.tab-YOUTUBE').hide();
+        fn('.tab-MODULE').hide();
     }
     function showYoutube()
     {
@@ -268,6 +284,7 @@ jQuery(document).ready(function(fn){
         fn('#K2-options').closest('div.panel').hide();
         fn('#EASYBLOG-options').closest('div.panel').hide();
         fn('#FLICKR-options').closest('div.panel').hide();
+        fn('#MODULE-options').closest('div.panel').hide();
         fn('#YOUTUBE-options').closest('div.panel').show();
 
         //j3 fix
@@ -275,6 +292,7 @@ jQuery(document).ready(function(fn){
         fn('a[href="#options-K2"]').closest('li').hide();
         fn('a[href="#options-EASYBLOG"]').closest('li').hide();
         fn('a[href="#options-FLICKR"]').closest('li').hide();
+        fn('a[href="#options-MODULE"]').closest('li').hide();
         fn('a[href="#options-YOUTUBE"]').closest('li').show();
 
         // Advance module manager tab layout fix
@@ -282,7 +300,35 @@ jQuery(document).ready(function(fn){
         fn('.tab-K2').hide();
         fn('.tab-EASYBLOG').hide();
         fn('.tab-FLICKR').hide();
+        fn('.tab-MODULE').hide();
         fn('.tab-YOUTUBE').show();
+    }
+
+     //Show only selected panel and hide others
+    function showModule()
+    {
+        fn('#JOOMLA-options').closest('div.panel').hide();
+        fn('#K2-options').closest('div.panel').hide();
+        fn('#EASYBLOG-options').closest('div.panel').hide();
+        fn('#FLICKR-options').closest('div.panel').hide();
+        fn('#YOUTUBE-options').closest('div.panel').hide();
+        fn('#MODULE-options').closest('div.panel').show();
+
+        //j3 fix
+        fn('a[href="#options-JOOMLA"]').closest('li').hide();
+        fn('a[href="#options-K2"]').closest('li').hide();
+        fn('a[href="#options-EASYBLOG"]').closest('li').hide();
+        fn('a[href="#options-FLICKR"]').closest('li').hide();
+        fn('a[href="#options-YOUTUBE"]').closest('li').hide();
+        fn('a[href="#options-MODULE"]').closest('li').show();
+
+        // Advance module manager tab layout fix
+        fn('.tab-JOOMLA').hide();
+        fn('.tab-K2').hide();
+        fn('.tab-EASYBLOG').hide();
+        fn('.tab-FLICKR').hide();
+        fn('.tab-YOUTUBE').hide();
+        fn('.tab-MODULE').show();
     }
 
     // Content source select and push to joomla input field related to it
@@ -298,7 +344,7 @@ jQuery(document).ready(function(fn){
         fn('#content-source').bsmodal('hide');
 
         //replace button with selected source
-        fn('.cs-btn').removeClass('joomla k2 easyblog flickr youtube').addClass(text);
+        fn('.cs-btn').removeClass('joomla k2 easyblog flickr youtube module').addClass(text);
         fn('.cs-btn span').text(text);
 
         panelSwitcher(text);
