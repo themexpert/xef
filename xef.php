@@ -127,7 +127,6 @@ class XEFHelper
                 $item->image = XEFUtility::getResizedImage($item->image, $dimensions, $this->module);
             }
 
-
             // Intro text
             $filter_by = $this->get('intro_limit_type');
 
