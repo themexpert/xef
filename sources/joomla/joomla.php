@@ -107,6 +107,7 @@ class XEFSourceJoomla extends XEFHelper
                'mc_dsc' => 'CASE WHEN (a.modified = '.$db->quote($db->getNullDate()).') THEN a.created ELSE a.modified END',
                'c_dsc' => 'a.created',
                'p_dsc' => 'a.publish_up',
+               'hits_dsc' => 'a.hits'
        );
 
         $ordering = JArrayHelper::getValue($order_map, $this->get('jom_ordering'), 'a.publish_up');
