@@ -60,9 +60,10 @@ abstract class XEFUtility
         $xef_url = JURI::root(true) . '/libraries/xef';
         $mod_url = JURI::root(true) . '/modules/' . $module->module;
 
-        $file = 'https://ajax.googleapis.com/ajax/libs/jquery/'.$version.'/jquery.min.js';
+        $file = '//ajax.googleapis.com/ajax/libs/jquery/'.$version.'/jquery.min.js';
 
-        if( $params->get('jquery_enabled') ){
+        if( $params->get('jquery_enabled') OR $params->get('load_jquery') )
+        {
 
             if( XEF_JVERSION == '25')
             {
@@ -80,12 +81,14 @@ abstract class XEFUtility
                                 $file = $mod_url . '/assets/js/' . 'jquery-'.$version.'.min.js';
                             }
                         }
+                    }else{
+                        $doc->addScript($file);
                     }
 
                     $app->set('jQuery',$version);
+                    $doc->addScript($file);
                 }
 
-                $doc->addScript($file);
 
             }else{
                 if( $cdn = 'google-cdn')
@@ -96,6 +99,21 @@ abstract class XEFUtility
                     JHtml::_('jquery.framework');
                 }
             }
+        }
+    }
+
+    public static function loadModernizr($module, $params)
+    {
+        $doc = JFactory::getDocument();
+
+        //path
+        $path = JURI::root(true) . '/libraries/xef/assets/js/modernizr.min.js';
+
+        if( !defined('XEF_MODERNIZR') )
+        {
+            $doc->addScript($path);
+
+            define('XEF_MODERNIZR', 1);
         }
     }
 
@@ -271,12 +289,13 @@ abstract class XEFUtility
 
         if( file_exists($tmpl_url . '/' . $css_file) )
         {
-            $doc->addStyleSheet($tmpl_url . '/' . $css_file);
-
+            $doc->addStyleSheet(JURI::root(true) . '/'. $tmpl_url . '/' . $css_file);
+        }elseif( file_exists($mod_url . '/' . $css_file) )
+        {
+            $doc->addStyleSheet(JURI::root(true) . '/'. $mod_url . '/' . $css_file);
         }else{
-            $doc->addStyleSheet($mod_url . '/' . $css_file);
+            return; // nothing found so return null
         }
-
     }
 
     public static function debug(Array $arr)
