@@ -143,5 +143,4 @@ class XEFHelper
 
         return $items;
     }
-
 }
