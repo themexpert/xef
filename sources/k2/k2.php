@@ -11,8 +11,8 @@ defined('_JEXEC') or die();
 // Require XEF helper class
 require_once JPATH_LIBRARIES . '/xef/xef.php';
 
-require_once(JPATH_SITE.DS.'components'.DS.'com_k2'.DS.'helpers'.DS.'route.php');
-require_once(JPATH_SITE.DS.'components'.DS.'com_k2'.DS.'helpers'.DS.'utilities.php');
+require_once(JPATH_SITE . '/components/com_k2/helpers/route.php');
+require_once(JPATH_SITE . '/components/com_k2/helpers/utilities.php');
 
 class XEFSourceK2 extends XEFHelper
 {
@@ -25,8 +25,6 @@ class XEFSourceK2 extends XEFHelper
 
         $cid = $this->get('k2_catid', NULL);
         $ordering = $this->get('k2_items_ordering','');
-        /*$componentParams = &JComponentHelper::getParams('com_k2');
-        $limitstart = JRequest::getInt('limitstart');*/
 
         $user = JFactory::getUser();
         $aid = $user->get('aid');
