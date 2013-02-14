@@ -16,9 +16,9 @@ class XEFSourceModule extends XEFHelper
     public function getItems()
     {
         //module specific
-        $mods = $this->get('modules');
+        $mods       = $this->get('modules');
         $options 	= array('style' => 'none');
-        $items = array();
+        $items      = array();
 
         for ($i=0;$i<count($mods);$i++)
         {
@@ -33,10 +33,10 @@ class XEFSourceModule extends XEFHelper
     //fetch module by id
     public function getModule( $id ){
 
-        $db		=& JFactory::getDBO();
-        $where = ' AND ( m.id='.$id.' ) ';
+        $db		= JFactory::getDBO();
+        $where  = ' AND ( m.id='.$id.' ) ';
 
-        $query = 'SELECT *'.
+        $query  = 'SELECT *'.
             ' FROM #__modules AS m'.
             ' WHERE m.client_id = 0'.
             $where.
