@@ -72,7 +72,7 @@ defined('_JEXEC') or die();
  */
     if( !class_exists('XEFUtility') )
     {
-        require_once ('utility.php');
+        require_once JPATH_LIBRARIES . '/xef/utility.php';
     }
 
 // ------------------------------------------------------

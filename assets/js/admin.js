@@ -107,22 +107,22 @@ jQuery(document).ready(function(fn){
     //EasyBlog cat filter selection
     fn('#jform_params_ezb_catfilter0').click(function(){
         fn('#jformparamsezb_catid').closest('li').hide();
-        fn('#jformparamsezb_catid').closest('div.control-group').hide();
+        fn('#jform_params_ezb_catid').closest('div.control-group').hide();
     });
 
     fn('#jform_params_ezb_catfilter1').click(function(){
         fn('#jformparamsezb_catid').closest('li').show();
-        fn('#jformparamsezb_catid').closest('div.control-group').show();
+        fn('#jform_params_ezb_catid').closest('div.control-group').show();
     });
 
     if (fn('#jform_params_ezb_catfilter0').attr('checked')) {
         fn('#jformparamsezb_catid').closest('li').hide();
-        fn('#jformparamsezb_catid').closest('div.control-group').hide();
+        fn('#jform_params_ezb_catid').closest('div.control-group').hide();
     }
 
     if (fn('#jform_params_ezb_catfilter1').attr('checked')) {
         fn('#jformparamsezb_catid').closest('li').show();
-        fn('#jformparamsezb_catid').closest('div.control-group').show();
+        fn('#jform_params_ezb_catid').closest('div.control-group').show();
     }
 
     //Loader selection

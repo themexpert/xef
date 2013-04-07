@@ -27,16 +27,25 @@ class JFormFieldUtility extends JFormField{
         $path_js    = JURI::root(true) . '/libraries/xef/assets/js';
 
         //load all CSS first
-        //$doc->addStyleSheet($path_css .'/jquery-ui-1.8.16.custom.css');
+        $doc->addStyleSheet($path_css .'/jquery-ui-1.8.16.custom.css');
         $doc->addStyleSheet($path_css .'/bootstrap.css');
 
-        //load jquery and plugins
-        $doc->addScript( $path_js . '/jquery-1.8.2.min.js' );
-        $doc->addScript( $path_js . '/jquery-ui-1.8.16.custom.min.js' );
-        $doc->addScript( $path_js . '/bootstrap.js');
-        $doc->addScript( $path_js . '/bootstrap-modal.js'); // Modified BS modal plugin to avoid conflict with Joomla
-        $doc->addScript( $path_js . '/chosen.jquery.min.js');
-
+        //J2.5 and 3.0 js list to load
+        $j25 = array('jquery-1.8.2.min.js', 'jquery-ui-1.8.16.custom.min.js', 'bootstrap.js', 'bootstrap-modal.js', 'chosen.jquery.min.js');
+        $j30 = array('jquery-ui-1.8.16.custom.min.js', 'bootstrap-modal.js');
+        
+        if ( version_compare(JVERSION, '2.5', 'ge') && version_compare(JVERSION, '3.0', 'lt') )
+        {
+            foreach( $j25 as $js )
+            {
+                $doc->addScript( $path_js . '/' . $js );
+            }
+        }else{
+            foreach( $j30 as $js )
+            {
+                $doc->addScript( $path_js . '/' . $js );
+            }
+        }
         //load admin script
         $doc->addScript( $path_js . '/admin.js');
 

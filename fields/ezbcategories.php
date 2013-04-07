@@ -23,7 +23,8 @@
 defined( '_JEXEC' ) or die('Restricted access');
 
 
-if(file_exists(JPATH_SITE.DS."components".DS."com_easyblog".DS."easyblog.php")){
+if( file_exists(JPATH_SITE . '/components/com_easyblog/easyblog.php' ) )
+{
     jimport('joomla.html.html');
     jimport('joomla.form.formfield');
 
@@ -37,7 +38,7 @@ if(file_exists(JPATH_SITE.DS."components".DS."com_easyblog".DS."easyblog.php")){
             $mainframe	= JFactory::getApplication();
             $doc 		= JFactory::getDocument();
 
-            require_once( JPATH_ROOT . DS . 'components' . DS . 'com_easyblog' . DS . 'constants.php' );
+            require_once( JPATH_ROOT . '/components/com_easyblog/constants.php' );
 
             $options 		= array();
             $attr 	 		= '';
@@ -60,7 +61,7 @@ if(file_exists(JPATH_SITE.DS."components".DS."com_easyblog".DS."easyblog.php")){
             $attr .= 'style="width:280px;"';
             $attr .= 'data-placeholder="Click here to select categories"';
 
-            require_once( JPATH_ROOT . DS . 'administrator' . DS . 'components' . DS . 'com_easyblog' . DS . 'models' . DS . 'categories.php' );
+            require_once( JPATH_ROOT . '/administrator/components/com_easyblog/models/categories.php' );
             $model		= new EasyBlogModelCategories();
             $categories	= $model->getAllCategories();
 

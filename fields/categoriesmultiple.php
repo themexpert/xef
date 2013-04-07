@@ -10,7 +10,7 @@
 
 // no direct access
 defined('_JEXEC') or die('Restricted access');
-if( file_exists(JPATH_SITE.DS."components".DS."com_k2".DS."k2.php") )
+if( file_exists( JPATH_SITE .'/components/com_k2/k2.php') )
 {
 
     jimport('joomla.form.formfield');
@@ -22,8 +22,6 @@ if( file_exists(JPATH_SITE.DS."components".DS."com_k2".DS."k2.php") )
 
         function getInput(){
             $params = JComponentHelper::getParams('com_k2');
-
-            $document = JFactory::getDocument();
 
             $db = JFactory::getDBO();
             $query = 'SELECT m.* FROM #__k2_categories m WHERE published=1 AND trash = 0 ORDER BY parent, ordering';
