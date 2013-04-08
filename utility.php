@@ -278,9 +278,14 @@ abstract class XEFUtility
 
         // If sub style is available then we'll check for that css file
         // Otherwise we'll convert module name for the css file
-        if( $params->get('style') )
+
+        if( $params->get('style') ) // Legacy for J2.5.x will not work on J3
         {
             $name = $params->get('style');
+
+        }elseif( $params->get('mod_style') ){ // This checking for dumb J3 filed name. J3 has style field name so we need to check for alternative!
+            $name = $params->get('mod_style');
+
         }else{
             $name = str_replace('mod_', '', $module->module);
         }
