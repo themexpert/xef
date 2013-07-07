@@ -37,7 +37,7 @@ class XEFSourceEasyblog extends XEFHelper
             JLoader::import( 'blog' , EBLOG_ROOT . '/' . 'models' );
         }
 
-        $model = JModel::getInstance( 'Blog' , 'EasyBlogModel' );
+        $model = EasyBlogHelper::getModel( 'Blog' );
 
         if( $this->get( 'ezfeatured') )
         {
@@ -54,7 +54,7 @@ class XEFSourceEasyblog extends XEFHelper
             for($i = 0; $i < count($items); $i++)
             {
                 $row    	=& $items[$i];
-                $author 	= JTable::getInstance( 'Profile', 'Table' );
+                $author 	= EasyBlogHelper::getTable( 'Profile', 'Table' );
 
                 $row->author		= $author->load( $row->created_by );
                 $row->commentCount 	= EasyBlogHelper::getCommentCount($row->id);
