@@ -23,7 +23,7 @@ class XEFSourceEasyblog extends XEFHelper
         $catid      = ($this->get('ezb_catfilter')) ? $this->get('ezb_catid',NULL) : '';
         $ordering   = $this->get('ezb_ordering','latest');
         $user 	    = JFactory::getUser();
-        $category	= JTable::getInstance( 'ECategory', 'Table' );
+        $category	= EasyBlogHelper::getTable( 'Category', 'Table' );
 
         $category->load($catid);
 
@@ -109,7 +109,7 @@ class XEFSourceEasyblog extends XEFHelper
 
     public function getImage($item)
     {
-        return XEFUtility::getImage($item->introtext);
+        return XEFUtility::getImage($item->intro);
     }
 
     public function getDate($item)
