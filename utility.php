@@ -91,7 +91,7 @@ abstract class XEFUtility
 
 
             }else{
-                if( $cdn = 'google-cdn')
+                if( $cdn == 'google-cdn')
                 {
                     $doc->addScript($file);
 
