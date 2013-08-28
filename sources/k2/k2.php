@@ -187,7 +187,7 @@ class XEFSourceK2 extends XEFHelper
 
     public function getLink($item)
     {
-        return urldecode(JRoute::_(K2HelperRoute::getItemRoute($item->id.':'.urlencode($item->alias), $item->catid.':'.urlencode($item->categoryalias))));
+        return urldecode(JRoute::_( K2HelperRoute::getItemRoute($item->id.':'.urlencode($item->alias), $item->catid.':'.urlencode($item->categoryalias)) . $this->getMenuItemId()));
     }
 
     public function getCategory($item)
@@ -197,7 +197,7 @@ class XEFSourceK2 extends XEFHelper
 
     public function getCategoryLink($item)
     {
-        return urldecode(JRoute::_(K2HelperRoute::getCategoryRoute($item->catid.':'.urlencode($item->categoryalias))));
+        return urldecode(JRoute::_(K2HelperRoute::getCategoryRoute($item->catid.':'.urlencode($item->categoryalias))) . $this->getMenuItemId());
     }
 
     public function getImage($item)

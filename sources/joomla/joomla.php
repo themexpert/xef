@@ -138,7 +138,7 @@ class XEFSourceJoomla extends XEFHelper
         if ($access || in_array($item->access, $authorised))
         {
             // We know that user has the privilege to view the article
-            $link = JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catslug));
+            $link = JRoute::_( ContentHelperRoute::getArticleRoute($item->slug, $item->catslug) . $this->getMenuItemId() );
         }
         else {
             $link = JRoute::_('index.php?option=com_users&view=login');
@@ -154,7 +154,7 @@ class XEFSourceJoomla extends XEFHelper
 
     public function getCategoryLink($item)
     {
-        return JRoute::_(ContentHelperRoute::getCategoryRoute($item->catid));
+        return JRoute::_( ContentHelperRoute::getCategoryRoute($item->catid) . $this->getMenuItemId() );
     }
 
     public function getImage($item)

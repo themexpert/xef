@@ -74,6 +74,31 @@ class XEFHelper
     }
 
     /*
+     * Get Itemid from module settings.
+     * @params ''
+     * @return string $itemId;
+     */
+    public function getMenuItemId()
+    {
+        $itemId         = '';
+        $routing_type    = $this->get( 'routing_type', 'default' );
+
+        if( $routing_type != 'default' )
+        {
+            switch ($routing_type) {
+                case 'menuitem':
+                    $itemId = $this->get( 'menuitemid' ) ? '&Itemid=' . $this->get( 'menuitemid' ) : '';
+                    break;
+                
+                default:
+                    break;
+            }
+        }
+        return $itemId;
+
+    }
+
+    /*
      * Prepare items before going to view.
      *
      * @params object $items Items object

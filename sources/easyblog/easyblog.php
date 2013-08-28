@@ -94,7 +94,7 @@ class XEFSourceEasyblog extends XEFHelper
 
     public function getLink($item)
     {
-        return  EasyBlogRouter::_('index.php?option=com_easyblog&view=entry&id=' . $item->id );
+        return  EasyBlogRouter::_('index.php?option=com_easyblog&view=entry&id=' . $item->id . $this->getMenuItemId() );
     }
 
     public function getCategory($item)
@@ -104,7 +104,7 @@ class XEFSourceEasyblog extends XEFHelper
 
     public function getCategoryLink($item)
     {
-        return EasyBlogRouter::_('index.php?option=com_easyblog&view=categories&layout=listings&id='.$item->category_id);
+        return EasyBlogRouter::_('index.php?option=com_easyblog&view=categories&layout=listings&id='.$item->category_id . $this->getMenuItemId());
     }
 
     public function getImage($item)
