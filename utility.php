@@ -127,6 +127,9 @@ abstract class XEFUtility
      */
     public static function getImage($text)
     {
+        // No image path
+        $image_path = 'libraries/xef/assets/images/noimage.jpg';
+
         if( preg_match( "/\<img.+?src=\"(.+?)\".+?\>/", $text, $matches ) )
         {
             $image_path='';
@@ -139,7 +142,7 @@ abstract class XEFUtility
             return $image_path;
         }
 
-        return false;
+        return $image_path;
     }
 
     /***
