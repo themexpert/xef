@@ -234,7 +234,7 @@ abstract class XEFUtility
         $image_size = getimagesize($path);
 
         $cache_path = JPATH_ROOT. '/cache/' . $module->module;
-
+        
         // create cache folder if not exist
         JFolder::create($cache_path, 0755);
 
@@ -243,7 +243,7 @@ abstract class XEFUtility
             $append = '_resized';
         }
 
-        $name = md5( $image_info['basename'].$dimensions['width'].$dimensions['height']) . $append;
+        $name = md5( $image_info['dirname'].$image_info['basename'].$dimensions['width'].$dimensions['height']) . $append;
 
         $newpath = $cache_path . '/' . $name . '.' . $image_info['extension'];
 
