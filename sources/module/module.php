@@ -22,9 +22,12 @@ class XEFSourceModule extends XEFHelper
 
         for ($i=0;$i<count($mods);$i++)
         {
-            $items[$i]->order 	= $this->getModule($mods[$i])->ordering;
-            $items[$i]->title 	= $this->getModule($mods[$i])->title;
-            $items[$i]->content = $items[$i]->introtext = JModuleHelper::renderModule( $this->getModule($mods[$i]), $options);
+            if( $this->getModule($mods[$i]) !== NULL )
+            {
+                $items[$i]->order   = $this->getModule($mods[$i])->ordering;
+                $items[$i]->title   = $this->getModule($mods[$i])->title;
+                $items[$i]->content = $items[$i]->introtext = JModuleHelper::renderModule( $this->getModule($mods[$i]), $options);
+            }
         }
 
         return $items;
@@ -46,7 +49,7 @@ class XEFSourceModule extends XEFHelper
         $db->setQuery( $query );
         $module = $db->loadObject();
 
-        if (!$module) return null;
+        if (!$module) return NULL;
 
         $file				= $module->module;
         $custom				= substr($file, 0, 4) == 'mod_' ?  0 : 1;
