@@ -1,6 +1,6 @@
 <?php
 /**
- *  @package Expert Extension Framework (XEF)
+ *  @package ThemeXpert Extension Framework (XEF)
  *  @copyright Copyright (c)2010-2012 ThemeXpert.com
  *  @license GNU General Public License version 3, or later
  **/

@@ -1,6 +1,6 @@
 <?php
 /**
- *  @package Expert Extension Framework (XEF)
+ *  @package ThemeXpert Extension Framework (XEF)
  *  @copyright Copyright (c)2010-2012 ThemeXpert.com
  *  @license GNU General Public License version 3, or later
  **/
@@ -13,9 +13,9 @@ jimport('joomla.filesystem.folder');
 jimport('joomla.filesystem.file');
 
 /**
- * Expert Extension Framework (XEF) helper class
+ * ThemeXpert Extension Framework (XEF) helper class
  *
- * Expert Extension Framework (XEF) is a set of classes which extends Joomla! 2.5 and later's
+ * ThemeXpert Extension Framework (XEF) is a set of classes which extends Joomla! 2.5 and later's
  * MVC framework with features making maintaining all ThemeXpert's extensions much easier.
  *
  * Initially designed for module development and more coming...

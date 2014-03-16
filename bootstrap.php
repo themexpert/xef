@@ -1,10 +1,10 @@
 <?php
 /**
- * XEF - Expert Extension Framework
+ * XEF - ThemeXpert Extension Framework
  *
  * An extension development framework for ThemeXpert
  *
- * @package		XEF - Expert Extension Framework
+ * @package		XEF - ThemeXpert Extension Framework
  * @author		ThemeXpert Team
  * @copyright	Copyright (c) 2010 - 2012, ThemeXpert.
  * @license		GNU General Public License version 3, or later
