@@ -41,6 +41,6 @@ ul.thumbnails.image_picker_selector li .thumbnail img{
   margin: 0; float: none;
 }
 ul.thumbnails.image_picker_selector li .thumbnail p{
-  margin: 5px 0 0; text-transform: uppercase; font-size: 11px;
+  margin: 5px 0 0; font-size: 11px;
 }
 ul.thumbnails.image_picker_selector li .thumbnail.selected p{ color: #fff; }
