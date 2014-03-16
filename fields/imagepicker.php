@@ -194,6 +194,10 @@ class JFormFieldImagePicker extends JFormField
 									? JText::_($key) : $value;
 								
 								$image_path = JURI::root(TRUE) . '/templates/' . $template->element . '/html/' . $module . '/' . $value . '.png';
+								if( !file_exists($image_path) )
+								{
+									$image_path = JURI::root(TRUE) . '/libraries/xef/assets/images/imagepicker_layout_not_found.png';
+								}
 
 								$data[] = array(
 									'value' => $value,
