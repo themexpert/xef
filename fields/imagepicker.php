@@ -49,7 +49,7 @@ class JFormFieldImagePicker extends JFormField
 		$doc->addScript( JURI::root(TRUE) . '/libraries/xef/assets/js/image-picker.min.js' );
 		$js = 'jQuery(document).ready(function(){
 			jQuery(".img-list").imagepicker({show_label: true});
-		})';
+		});';
 		$doc->addScriptDeclaration($js);
 
 		// Get the client id.
