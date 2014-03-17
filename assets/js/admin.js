@@ -180,6 +180,7 @@ jQuery(document).ready(function(fn){
     //Show only selected panel and hide others
     function showJoomla()
     {
+        // Legacy code - Remove from v2
         fn('#JOOMLA-options').closest('div.panel').show();
         fn('#K2-options').closest('div.panel').hide();
         fn('#EASYBLOG-options').closest('div.panel').hide();
@@ -187,7 +188,7 @@ jQuery(document).ready(function(fn){
         fn('#YOUTUBE-options').closest('div.panel').hide();
         fn('#MODULE-options').closest('div.panel').hide();
 
-        //j3 fix
+        //j3 fix - Legacy code - Remove from v2
         fn('a[href="#options-JOOMLA"]').closest('li').show();
         fn('a[href="#options-K2"]').closest('li').hide();
         fn('a[href="#options-EASYBLOG"]').closest('li').hide();
@@ -195,16 +196,30 @@ jQuery(document).ready(function(fn){
         fn('a[href="#options-YOUTUBE"]').closest('li').hide();
         fn('a[href="#options-MODULE"]').closest('li').hide();
 
-        // Advance module manager tab layout fix
+        // Advance module manager tab layout fix - Legacy code - Remove from v2
         fn('.tab-JOOMLA').show();
         fn('.tab-K2').hide();
         fn('.tab-EASYBLOG').hide();
         fn('.tab-FLICKR').hide();
         fn('.tab-YOUTUBE').hide();
         fn('.tab-MODULE').hide();
+
+        // New wrapper item
+        // @since : 1.4.0
+        fn('#cs-joomla').show();
+        fn('#cs-k2').hide();
+        fn('#cs-eb').hide();
     }
     function showK2()
     {
+
+        // New wrapper item
+        // @since : 1.4.0
+        fn('#cs-joomla').hide();
+        fn('#cs-k2').show();
+        fn('#cs-eb').hide();
+
+        // Legacy selector
         fn('#JOOMLA-options').closest('div.panel').hide();
         fn('#K2-options').closest('div.panel').show();
         fn('#EASYBLOG-options').closest('div.panel').hide();
@@ -230,6 +245,13 @@ jQuery(document).ready(function(fn){
     }
     function showEasyblog()
     {
+        // New wrapper item
+        // @since : 1.4.0
+        fn('#cs-joomla').hide();
+        fn('#cs-k2').hide();
+        fn('#cs-eb').show();
+
+        // Legacy selector
         fn('#JOOMLA-options').closest('div.panel').hide();
         fn('#K2-options').closest('div.panel').hide();
         fn('#EASYBLOG-options').closest('div.panel').show();
