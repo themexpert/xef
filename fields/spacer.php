@@ -19,46 +19,25 @@ class JFormFieldSpacer extends JFormField{
 
     protected $type = 'Spacer';
 
-    protected function getInput()
-    {
+    protected function getLabel(){
+        return ;
+    }
+
+    protected function getInput(){
         $html   = array();
         $class  = (string) $this->element['class'];
         $label  = '';
-        $kind   = (string) $this->element['kind'];
-        $start  =  $this->element['start'];
-        $end    = (int) $this->element['end'];
 
         // Get the label text from the XML element, defaulting to the element name.
         $text = $this->element['label'] ? (string) $this->element['label'] : '';
 
-        $output = '';
-
-        if( $kind == 'wrap' AND $start )
-        {
-            $output = '</li><div id="'. $class .'" class="cs-options clearfix">';
+        // Add the label text and closing tag.
+        if($text != NULL){
             $label .= '<div class="spacer'.(($text != '') ? ' hasText hasTip' : '').'" title="'. JText::_($this->description) .'"><span>' . JText::_($text) . '</span></div>';
-            return $output . $label ;
-
-        }elseif( $end )
-        {
-            return $output = '</div><li>';
-        }else
-        {
-            // Add the label text and closing tag.
-            if($text != NULL){
-                $label .= '<div class="spacer'.(($text != '') ? ' hasText hasTip' : '').'" title="'. JText::_($this->description) .'"><span>' . JText::_($text) . '</span></div>';
-            }
-
-            $html[] = $label;
-
-            return implode('', $html);    
         }
 
-        
-    }
+        $html[] = $label;
 
-    protected function getLabel(){
-       return ; 
+        return implode('', $html);
     }
 }
-
