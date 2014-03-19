@@ -40,6 +40,7 @@ class JFormFieldUtility extends JFormField{
             {
                 $doc->addScript( $path_js . '/' . $js );
             }
+            $doc->addStyleSheet($path_css .'/chosen.css');
         }else{
             foreach( $j30 as $js )
             {
