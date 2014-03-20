@@ -24,6 +24,7 @@ class XEFSourceModule extends XEFHelper
         {
             if( $this->getModule($mods[$i]) !== NULL )
             {
+                $items[$i] = new stdClass();
                 $items[$i]->order   = $this->getModule($mods[$i])->ordering;
                 $items[$i]->title   = $this->getModule($mods[$i])->title;
                 $items[$i]->content = $items[$i]->introtext = JModuleHelper::renderModule( $this->getModule($mods[$i]), $options);
