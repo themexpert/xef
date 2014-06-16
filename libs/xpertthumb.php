@@ -9,6 +9,9 @@
  *
  */
 
+// Protect from unauthorized access
+defined('_JEXEC') or die();
+
 jimport('joomla.image.image');
 
 /**
