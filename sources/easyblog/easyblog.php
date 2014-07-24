@@ -53,7 +53,11 @@ class XEFSourceEasyblog extends XEFHelper
         if(! empty($items)){
             for($i = 0; $i < count($items); $i++)
             {
-                $row    	=& $items[$i];
+                $data 	=& $items[$i];
+                $row 	= EasyBlogHelper::getTable( 'Blog', 'Table' );
+                $row->bind( $data );
+
+                //$row    	=& $items[$i];
                 $author 	= EasyBlogHelper::getTable( 'Profile', 'Table' );
 
                 $row->author		= $author->load( $row->created_by );
@@ -86,7 +90,8 @@ class XEFSourceEasyblog extends XEFHelper
                 }
             }//end foreach
         }
-        //XEFUtility::debug($items);
+
+//        XEFUtility::debug($items);
         $items = $this->prepareItems($items);
 
         return $items;
@@ -109,7 +114,12 @@ class XEFSourceEasyblog extends XEFHelper
 
     public function getImage($item)
     {
-        return XEFUtility::getImage($item->intro);
+        if( isset($item->image) AND ($item->image != null) )
+        {
+            $image = json_decode($item->image);
+            return $image->url;
+        }
+        return ( $item->intro ) ? XEFUtility::getImage($item->intro) : XEFUtility::getImage($item->content);
     }
 
     public function getDate($item)

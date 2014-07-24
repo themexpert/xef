@@ -163,7 +163,10 @@ class XEFHelper
             }elseif($filter_by == 'chars')
             {
                 $item->introtext = XEFUtility::characterLimit($item->introtext, $this->get('intro_limit',100) );
+            }else{
+                $item->introtext = $item->intro;
             }
+
         }
 
         return $items;
