@@ -17,82 +17,54 @@ class XEFSourceFlickr extends XEFHelper
 	{
 		jimport('joomla.filesystem.folder');
 
-        $api_key = '2a4dbf07ad5341b2b06d60c91d44e918';
-        $cache_path = JPATH_ROOT. '/cache/test/flickr';
-        $nsid = '';
-        $photos = array();
+        $api_key = ($this->get('api_key')) ? $this->get('api_key') : '2a4dbf07ad5341b2b06d60c91d44e918';
+        $cache_path = JPATH_ROOT. '/cache/mod_'.$this->module->name . $this->module->id .'/flickr';
 
         // create cache folder if not exist
         JFolder::create($cache_path, 0755);
 
+        // Include Flickr wrapper
         if( !class_exists('phpFlickr'))
         {
             require_once 'api/phpFlickr.php';    
         }
 
-        $f = new phpFlickr($api_key);
+        // Flickr instance
+        $f = new phpFlickr($api_key, '30422154f1627821');
+
+        // Enable file system cache
         $f->enableCache('fs',$cache_path, $this->get('cache_time')); //enable caching
 
-        if($this->get('flickr_search_from') == 'user')
+        // Get the use NSID first
+        $username = $this->get('flickr_user_name');
+        if($username != NULL)
         {
-            $username = $this->get('flickr_search_from');
-            if($username != NULL)
-            {
-                $person = $f->people_findByUsername($username);
-                $nsid = $person['id'];
-            }else{
-            	return '';
-            }
-                
-            $photos = $f->people_getPublicPhotos($nsid, NULL, NULL, $this->get('item_count'));
-            $source = $photos['photos']['photo'];
+            $person = $f->people_findByUsername($username);
+            $nsid = $person['id'];
         }
+        // Get photos from people
+        $photos = $f->people_getPublicPhotos($nsid, NULL, NULL, $this->get('count'));
+        $source = $photos['photos']['photo'];
 
-        if( $this->get('flickr_search_from') == 'tags' OR $this->get('flickr_search_from') == 'text')
-        {
-            $tags = $this->get('flickr_attrs');
-
-            if(!empty($tags))
-            {
-                $attrs = '';
-                if($this->get('flickr_search_from') == 'tags') $attrs = 'tags';
-                if($this->get('flickr_search_from') == 'text') $attrs = 'text';
-
-                $photos = $f->photos_search(array($attrs=>$tags,'per_page'=>$this->get('item_count')));
-                $source = $photos['photo'];
-            }else{
-            	return '';
-            }               
-        }
-
-        if($this->get('flickr_search_from') == 'recent'){
-            $photos = $f->photos_getRecent( NULL, $this->get('item_count') );
-            $source = $photos['photo'];
-        }
-
-        //$extras = 'description,date_upload,owner_name,tags';
         $items = array();
         $i = 0;
         if(count($source)>0){
             foreach ($source as $photo)
             {
-                $id = $photo['id'];
                 $obj = new stdClass();
-                $info = $f->photos_getInfo($id);
-                $nsid = $info['owner']['username'];
 
-                $obj->title = $info['title'];
+                $obj->title = $photo['title'];
                 $obj->image = $f->buildPhotoURL($photo,'_b');
-                $obj->link = $info['urls']['url'][0]['_content'];
-                $obj->introtext = $info['description'];
-                $obj->date = date('Y.M.d : H:i:s A', $info['dateuploaded']);
+//                $obj->link = $info['urls']['url'][0]['_content'];
+//                $obj->introtext = $info['description'];
+//                $obj->date = date('Y.M.d : H:i:s A', $info['dateuploaded']);
 
                 $items[$i] = $obj;
                 $i++;
             }
         }
-        //return $items;
-        var_dump($f);
+
+        return $items;
 	}
 
 	public function getLink($item)
