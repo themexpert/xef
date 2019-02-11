@@ -23,7 +23,11 @@
 defined( '_JEXEC' ) or die('Restricted access');
 
 
-if( file_exists(JPATH_SITE . '/components/com_easyblog/easyblog.php' ) )
+if( 
+    file_exists( JPATH_SITE . '/components/com_easyblog/easyblog.php' ) 
+    and
+    file_exists( JPATH_ROOT . '/components/com_easyblog/constants.php' )
+)
 {
     jimport('joomla.html.html');
     jimport('joomla.form.formfield');
