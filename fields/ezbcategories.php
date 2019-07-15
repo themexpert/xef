@@ -21,16 +21,11 @@
 
 // no direct access
 defined( '_JEXEC' ) or die('Restricted access');
+jimport('joomla.html.html');
+jimport('joomla.form.formfield');
 
-
-if( 
-    file_exists( JPATH_SITE . '/components/com_easyblog/easyblog.php' ) 
-    and
-    file_exists( JPATH_ROOT . '/components/com_easyblog/constants.php' )
-)
+if( file_exists( JPATH_ROOT . '/components/com_easyblog/constants.php' ) )
 {
-    jimport('joomla.html.html');
-    jimport('joomla.form.formfield');
 
     class JFormFieldEZBCategories extends JFormField
     {
@@ -69,6 +64,67 @@ if(
             $model		= new EasyBlogModelCategories();
             $categories	= $model->getAllCategories();
 
+            if(count($categories) > 0)
+            {
+                $optgroup = JHTML::_('select.optgroup','Select category','id','title');
+                array_push($categoryList,$optgroup);
+
+                foreach ($categories as $row) {
+                    $opt    = new stdClass();
+                    $opt->id    = $row->id;
+                    $opt->title = $row->title;
+
+                    array_push($categoryList,$opt);
+                }
+            }
+
+            $html = JHTML::_('select.genericlist',  $categoryList, $this->name, trim($attr), 'id', 'title', $this->value );
+            return $html;
+        }
+    }
+}
+else
+{class JFormFieldEZBCategories extends JFormField
+    {
+
+        protected $type = 'EZBCategories';
+
+        protected function getInput()
+        {
+            $file = JPATH_ADMINISTRATOR . '/components/com_easyblog/includes/easyblog.php';
+            if (!JFile::exists($file)) {
+                return;
+            }
+            require_once($file);
+
+            $mainframe	= JFactory::getApplication();
+            $doc 		= JFactory::getDocument();
+
+            $options 		= array();
+            $attr 	 		= '';
+            $categoryList	= array();
+
+            // Initialize some field attributes.
+            $attr .= $this->element['class'] ? ' class="'.(string) $this->element['class'].'"' : 'class="inputbox chzn-select"';
+
+            // To avoid user's confusion, readonly="true" should imply disabled="true".
+            if ( (string) $this->element['readonly'] == 'true' || (string) $this->element['disabled'] == 'true') {
+                $attr .= ' disabled="disabled"';
+            }
+
+            $attr .= $this->element['size'] ? ' size="'.(int) $this->element['size'].'"' : '';
+            $attr .= $this->multiple ? ' multiple="multiple"' : '';
+
+            // Initialize JavaScript field attributes.
+            $attr .= $this->element['onchange'] ? ' onchange="'.(string) $this->element['onchange'].'"' : '';
+            $attr .= 'multiple="multiple"';
+            $attr .= 'style="width:280px;"';
+            $attr .= 'data-placeholder="Click here to select categories"';
+
+            require_once( JPATH_ROOT . '/administrator/components/com_easyblog/models/categories.php' );
+            $model = EB::model('Category');
+            // Retrieve parent categories
+            $categories = $model->getCategories('latest', false, 0, '', false);
             if(count($categories) > 0)
             {
                 $optgroup = JHTML::_('select.optgroup','Select category','id','title');

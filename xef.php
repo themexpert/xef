@@ -164,9 +164,14 @@ class XEFHelper
             {
                 $item->introtext = XEFUtility::characterLimit($item->introtext, $this->get('intro_limit',100) );
             }
-//            else{
-//                $item->introtext = $item->intro;
-//            }
+            // else{
+            //    $item->introtext = $item->intro;
+            // }
+
+            if($this->get('prepare_content', false))
+            {
+                $item->introtext = JHtml::_('content.prepare', $item->introtext, '', 'com_content.article');
+            }
 
         }
 
