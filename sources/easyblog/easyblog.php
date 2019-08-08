@@ -208,6 +208,9 @@ else
             if (!$cover && $this->params->get('show_photo_placeholder', false)) {
                 $cover = $post->getImage($this->params->get('photo_size', 'medium'));
             }
+            
+            $prefix = str_replace(['http:', 'https:'], '', JUri::root());
+            $cover = str_replace($prefix, '', $cover);            
 
             return $cover;
         }
