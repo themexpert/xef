@@ -139,6 +139,10 @@ else
 {
     // Load Easyblog helper and router class
     require_once JPATH_ADMINISTRATOR . '/components/com_easyblog/includes/easyblog.php';
+    if( !class_exists( 'EasyBlogHelper' ) ){
+        class EasyBlogHelper extends EB {}
+    }
+    
     class XEFSourceEasyblog extends XEFHelper
     {
         public function getItems()
