@@ -6,7 +6,8 @@
  **/
 
 // Protect from unauthorized access
-defined('_JEXEC') or die();
+defined('_JEXEC') or die('Restricted access');
+
 jimport('joomla.system.file');
 jimport('joomla.system.folder');
 

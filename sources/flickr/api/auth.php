@@ -1,4 +1,11 @@
 <?php
+
+  /**
+   *  @package ThemeXpert Extension Framework (XEF)
+   *  @copyright Copyright (c)2010-2012 ThemeXpert.com
+   *  @license GNU General Public License version 3, or later
+   **/  
+
     /* Last updated with phpFlickr 2.3.2
      *
      * Edit these variables to reflect the values you need. $default_redirect 
@@ -6,6 +13,10 @@
      * using phpFlickr::auth() from another page or if you set the remember_uri
      * argument to false.
      */
+
+
+    defined('_JEXEC') or die('Restricted access');     
+
     $api_key                 = "[your api key]";
     $api_secret              = "[your api secret]";
     $default_redirect        = "/";

@@ -1,4 +1,11 @@
 <?php
+
+/**
+ *  @package ThemeXpert Extension Framework (XEF)
+ *  @copyright Copyright (c)2010-2012 ThemeXpert.com
+ *  @license GNU General Public License version 3, or later
+ **/
+
 /* Last updated with phpFlickr 1.3.2
  *
  * This example file shows you how to call the 100 most recent public
@@ -12,6 +19,8 @@
  * Obviously, you'll want to replace the "<api key>" with one provided 
  * by Flickr: http://www.flickr.com/services/api/key.gne
  */
+
+defined('_JEXEC') or die('Restricted access');
 
 require_once("phpFlickr.php");
 $f = new phpFlickr("<api key>");

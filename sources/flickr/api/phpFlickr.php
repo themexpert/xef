@@ -1,4 +1,5 @@
 <?php
+
 /* phpFlickr
  * Written by Dan Coulter (dan@dancoulter.com)
  * Project Home Page: http://github.com/dancoulter/phpflickr
@@ -17,6 +18,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+
+defined('_JEXEC') or die('Restricted access'); 
+
 if ( !class_exists('phpFlickr') ) {
 	if (session_id() == "") {
 		@session_start();

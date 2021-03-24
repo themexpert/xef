@@ -204,7 +204,6 @@ class JFormFieldSource extends JFormField
 
                     foreach($fieldset as $field)
                     {
-                        //var_dump($field);
                         $html .= '<li>' . $field->getLabel() . '</li>';
                         $html .= '<li>' . $field->getInput() . '</li>';
                     }*/
@@ -214,7 +213,6 @@ class JFormFieldSource extends JFormField
                     jimport('joomla.form.form');
                     $form = JForm::getInstance('test', JPATH_LIBRARIES.'/xef/sources/joomla/option.xml');;
                     //$form->loadFile($option, false);
-                    var_dump($form);
 
                     /*foreach ($form->getFieldsets('params') as $fieldsets => $fieldset)
                     {
