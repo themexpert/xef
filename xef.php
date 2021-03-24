@@ -14,7 +14,7 @@
  */
 
 // Protect from unauthorized access
-defined('_JEXEC') or die();
+defined('_JEXEC') or die('Restricted access');
 
 /**
  * ThemeXpert Extension Framework (XEF) helper class

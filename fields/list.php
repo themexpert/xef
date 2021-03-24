@@ -18,7 +18,7 @@ defined( '_JEXEC' ) or die('Restricted access');
  * @subpackage  Form
  * @since       11.1
  */
-class JFormFieldList extends JFormField
+class JFormFieldList_x extends JFormField
 {
 	/**
 	 * The form field type.
@@ -26,7 +26,7 @@ class JFormFieldList extends JFormField
 	 * @var    string
 	 * @since  11.1
 	 */
-	protected $type = 'List';
+	protected $type = 'List_x';
 
 	/**
 	 * Method to get the field input markup for a generic list.

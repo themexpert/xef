@@ -6,7 +6,7 @@
  **/
 
 // Protect from unauthorized access
-defined('_JEXEC') or die();
+defined('_JEXEC') or die('Restricted access');
 
 // Require XEF helper class
 require_once JPATH_LIBRARIES . '/xef/xef.php';

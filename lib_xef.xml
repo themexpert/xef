@@ -11,7 +11,7 @@
     <authorUrl>http://themexpert.com/</authorUrl>
     <copyright>Copyright (C) 2011 - 2011 ThemeXpert</copyright>
     <license>http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3</license>
-    <version>1.7.0</version>
+    <version>1.7.3</version>
 
     <files>
         <folder>assets</folder>
@@ -25,5 +25,10 @@
         <file>xef.php</file>
         <file>utility.php</file>
     </files>
+
+	<updateservers>
+         <!-- Note: No spaces or linebreaks allowed between the server tags -->
+        <server type="extension" priority="1" name="ThemeXpert Extension Framework (XEF)"><![CDATA[https://raw.githubusercontent.com/themexpert/xef/master/manifest.xml]]></server>
+    </updateservers>  
 
 </extension>

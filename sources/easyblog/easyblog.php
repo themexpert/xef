@@ -6,14 +6,16 @@
  **/
 
 // Protect from unauthorized access
-defined('_JEXEC') or die();
+defined('_JEXEC') or die('Restricted access');
+
 jimport('joomla.system.file');
 jimport('joomla.system.folder');
 
 // Require XEF helper class
 require_once JPATH_LIBRARIES . '/xef/xef.php';
 
-if( file_exists( JPATH_ROOT . '/components/com_easyblog/constants.php' ) )
+// if( file_exists( JPATH_ROOT . '/components/com_easyblog/constants.php' ) )
+if( file_exists( JPATH_ROOT . '/components/com_easyblog/includes/easyblog.php' ) )
 {
     // Load Easyblog helper and router class
     require_once JPATH_SITE . '/components/com_easyblog/helpers/helper.php';
@@ -138,6 +140,10 @@ else
 {
     // Load Easyblog helper and router class
     require_once JPATH_ADMINISTRATOR . '/components/com_easyblog/includes/easyblog.php';
+    if( !class_exists( 'EasyBlogHelper' ) ){
+        class EasyBlogHelper extends EB {}
+    }
+    
     class XEFSourceEasyblog extends XEFHelper
     {
         public function getItems()
@@ -157,6 +163,7 @@ else
                 {
                     $data 	=& $items[$i];
                     $data->introtext = $data->intro;
+                    $data->image = $this->getImage($data);
                     
                 }//end foreach
             }
@@ -187,12 +194,30 @@ else
 
         public function getImage($item)
         {
-            if( isset($item->image) AND ($item->image != null) )
-            {
-                $image = json_decode($item->image);
-                return $image->url;
+            $post = EB::post();
+            $post->load($item->id);
+
+            $cover = false;
+
+            // This is the standard method when authors adds a post cover on the post
+            if ($post->hasImage()) {
+                $cover = $post->getImage($this->params->get('photo_size', 'medium'));
             }
-            return ( $item->intro ) ? XEFUtility::getImage($item->intro) : XEFUtility::getImage($item->content);
+
+            // Get the first image to be used as the post cover
+            if (!$post->hasImage() && $this->params->get('photo_legacy', true)) {
+                $cover = $post->getContentImage();
+            }
+
+            // If we still cannot get the cover, determines if we should be showing a place holder
+            if (!$cover && $this->params->get('show_photo_placeholder', false)) {
+                $cover = $post->getImage($this->params->get('photo_size', 'medium'));
+            }
+            
+            $prefix = str_replace(['http:', 'https:'], '', JUri::root());
+            $cover = str_replace($prefix, '', $cover);            
+
+            return $cover;
         }
 
         public function getDate($item)

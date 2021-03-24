@@ -1,4 +1,12 @@
 <?php
+
+    /**
+     *  @package ThemeXpert Extension Framework (XEF)
+     *  @copyright Copyright (c)2010-2012 ThemeXpert.com
+     *  @license GNU General Public License version 3, or later
+     **/
+
+
     /* Last updated with phpFlickr 1.4
      *
      * If you need your app to always login with the same user (to see your private
@@ -7,6 +15,8 @@
      * use the phpFlickr::setToken() function whenever you create an instance of 
      * the class.
      */
+
+    defined('_JEXEC') or die('Restricted access');     
 
     require_once("phpFlickr.php");
     $f = new phpFlickr("<api key>", "<secret>");

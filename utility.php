@@ -6,7 +6,7 @@
  **/
 
 // Protect from unauthorized access
-defined('_JEXEC') or die();
+defined('_JEXEC') or die('Restricted access');
 
 // Import Joomla file system class
 jimport('joomla.filesystem.folder');
