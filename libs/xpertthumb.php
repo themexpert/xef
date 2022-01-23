@@ -37,7 +37,7 @@ class XpertThumb extends JImage
         if (!isset(self::$formats[IMAGETYPE_JPEG]))
         {
             $info = gd_info();
-            self::$formats[IMAGETYPE_JPEG] = ($info['JPEG Support']) ? true : ($info['JPG Support']) ? true :false;
+            self::$formats[IMAGETYPE_JPEG] = ($info['JPEG Support'] ? true : $info['JPG Support']) ? true :false;
             self::$formats[IMAGETYPE_PNG] = ($info['PNG Support']) ? true : false;
             self::$formats[IMAGETYPE_GIF] = ($info['GIF Read Support']) ? true : false;
         }
