@@ -13,6 +13,15 @@
     <license>http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3</license>
     <version>1.7.3</version>
 
+     <media destination="xef" folder="assets">
+        <folder>css</folder>
+        <folder>css_4</folder>
+        <folder>images</folder>
+        <folder>js</folder>
+        <folder>js_4</folder>
+        <folder>less</folder>
+    </media>
+
     <files>
         <folder>assets</folder>
         <folder>fields</folder>

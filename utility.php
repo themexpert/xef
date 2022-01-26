@@ -7,10 +7,14 @@
 
 // Protect from unauthorized access
 defined('_JEXEC') or die('Restricted access');
+use Joomla\CMS\Filesystem\File;
+if(JVERSION<4){
 
 // Import Joomla file system class
 jimport('joomla.filesystem.folder');
 jimport('joomla.filesystem.file');
+}
+use Joomla\CMS\Factory;
 
 /**
  * ThemeXpert Extension Framework (XEF) helper class
@@ -26,6 +30,7 @@ abstract class XEFUtility
 
     public static function getModuleId($module, $params)
     {
+        
         $id = ($params->get('auto_module_id',0)==1) ? 'txmod_'.$module->id : $params->get('module_unique_id');
 
         return $id;
@@ -130,6 +135,8 @@ abstract class XEFUtility
         // No image path
         $image_path = 'libraries/xef/assets/images/noimage.jpg';
 
+        // echo $text;
+
         if( preg_match( "/\<img.+?src=\"(.+?)\".+?\>/", $text, $matches ) )
         {
             $image_path='';
@@ -138,6 +145,7 @@ abstract class XEFUtility
             {
                 $image_path = $matches[1];
             }
+        // echo $image_path; die;
 
             return $image_path;
         }
@@ -179,8 +187,15 @@ abstract class XEFUtility
     // Word limit
     public static function wordLimit($str, $limit = 100, $end_char = '&#8230;')
     {
+        if(JVERSION<4){
         if (JString::trim($str) == '')
             return $str;
+        }
+        else{
+            if (trim($str) == '')
+            return $str;
+        }
+        
 
         // always strip tags for text
         $str = strip_tags($str);
@@ -190,14 +205,24 @@ abstract class XEFUtility
         $str = preg_replace($find, $replace, $str);
 
         preg_match('/\s*(?:\S*\s*){'.(int)$limit.'}/u', $str, $matches);
+        if(JVERSION<4){
         if (JString::strlen($matches[0]) == JString::strlen($str))
             $end_char = '';
         return JString::rtrim($matches[0]).$end_char;
+        }
+        else{
+            if (strlen($matches[0]) == strlen($str))
+                $end_char = '';
+            return rtrim($matches[0]).$end_char;
+        }
+        
     }
 
     // Character limit
     public static function characterLimit($str, $limit = 150, $end_char = '...')
     {
+        if(JVERSION<4){
+
         if (JString::trim($str) == '')
             return $str;
 
@@ -217,68 +242,101 @@ abstract class XEFUtility
         {
             return $str;
         }
+    }
+    else{
+        if (trim($str) == '')
+            return $str;
+
+        // always strip tags for text
+        $str = strip_tags(trim($str));
+
+        $find = array("/\r|\n/u", "/\t/u", "/\s\s+/u");
+        $replace = array(" ", " ", " ");
+        $str = preg_replace($find, $replace, $str);
+
+        if (strlen($str) > $limit)
+        {
+            $str = substr($str, 0, $limit);
+            return rtrim($str).$end_char;
+        }
+        else
+        {
+            return $str;
+        }
+    }
 
     }
 
-    public static function getResizedImage( $path, $dimensions = array(), $module, $append= '')
+    public static function getResizedImage( $path, $dimensions, $module, $append= '')
     {
-        if( !file_exists($path) ) return ;
+        $fullPath  = JPATH_SITE.'/'.$path;
+        $filePaths = explode('#', $fullPath);
 
-        if(!class_exists('XpertThumb')){
+        if (file_exists($filePaths[0])) {
+            $fullPath = $filePaths[0];
+        } else {
+            return $path;
+        }
+
+        if ( ! class_exists('XpertThumb')) {
             include_once 'libs/xpertthumb.php';
         }
 
-        $xt = new XpertThumb($path);
+        $xt         = new XpertThumb($fullPath);
+        $image_info = pathinfo($fullPath);
 
-        $image_info = pathinfo($path);
-        $image_size = getimagesize($path);
+        $cache_path = JPATH_ROOT.'/cache/'.$module->module;
 
-        $cache_path = JPATH_ROOT. '/cache/' . $module->module;
-        
         // create cache folder if not exist
         JFolder::create($cache_path, 0755);
 
-        if(! $append )
-        {
+        if ( ! $append) {
             $append = '_resized';
         }
 
-        $name = md5( $image_info['dirname'].$image_info['basename'].$dimensions['width'].$dimensions['height']) . $append;
+        $name = md5($image_info['dirname'].$image_info['basename'].$dimensions['width'].$dimensions['height']).$append;
 
-        $newpath = $cache_path . '/' . $name . '.' . $image_info['extension'];
+        $newPath = $cache_path.'/'.$name.'.'.$image_info['extension'];
 
-        $image_uri = JURI::base(true). '/cache/' . $module->module . '/'  . $name . '.' . $image_info['extension'];
+        $image_uri = JURI::base(true).'/cache/'.$module->module.'/'.$name.'.'.$image_info['extension'];
 
-        if( $image_info['extension'] == 'png' )
-        {
+        if ($image_info['extension'] == 'png') {
             $type = 3;
 
-        }elseif($image_info['extension'] == 'gif')
-        {
+        } elseif ($image_info['extension'] == 'gif') {
             $type = 1;
 
-        }else{
+        } else {
 
             $type = 2;
         }
 
-        if(!file_exists($newpath))
-        {
-            $xt->resize( $dimensions['width'], $dimensions['height'] , true, 1 )
-                ->toFile( $newpath, $type );
+        if (!file_exists($newPath)) {
+            $xt->resize($dimensions['width'], $dimensions['height'], true, 1)
+               ->toFile($newPath, $type);
         }
+
         return $image_uri;
     }
 
     public static function loadStyleSheet($module, $params)
     {
+        if(JVERSION<4){
         $doc        = JFactory::getDocument();
         $app        = JApplication::getInstance('site', array(), 'J');
         $template   = $app->getTemplate();
         $mod_url    = 'modules/' . $module->module . '/assets/css';
         $tmpl_url   = 'templates/' . $template . '/css';
         $ext        = '.css';
-
+        }
+        else{
+            $doc        = Factory::getDocument();
+            // $app        = Factory::getInstance('site', array(), 'J');
+            $template   = Factory::getApplication()->getTemplate();
+            $mod_url    = 'modules/' . $module->module . '/assets/css';
+            $tmpl_url   = 'templates/' . $template . '/css';
+            $ext        = '.css';
+        }
         // If sub style is available then we'll check for that css file
         // Otherwise we'll convert module name for the css file
 

@@ -108,6 +108,7 @@ class XEFHelper
      **/
     public function prepareItems($items)
     {
+        // var_dump($items); die;
         //$source = $this->get('content_source');
 
         foreach ($items as $item)
@@ -124,6 +125,8 @@ class XEFHelper
 
             // Image
             $item->image = $this->getImage($item);
+
+            // echo $item->image; die;
 
             // Date
             $item->date = $this->getDate($item);
@@ -143,6 +146,8 @@ class XEFHelper
                     'width'  => $this->get('thumb_width',100),
                     'height' => $this->get('thumb_height',100)
                 );
+
+                
                 $item->thumb = XEFUtility::getResizedImage($item->image, $thumb_dimensions, $this->module, '_thumb');
             }
 
