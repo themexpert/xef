@@ -95,11 +95,15 @@ if ( ! function_exists('importSource'))
         // Class name based on given source name
         $class_name = $prefix. ucfirst($name);
 
+        // echo $path; die;
+
         if( ! class_exists($class_name) )
-        {
+        { 
+            // echo $path . strtolower($name) . '/' . $name . '.php'; die;
             require_once ($path . strtolower($name) . '/' . $name . '.php');
         }
 
+        
         return $class_name;
     }
 }

@@ -8,22 +8,53 @@
 // Protect from unauthorized access
 defined('_JEXEC') or die('Restricted access');
 
+// use Joomla\CMS\Router\Route;
+
 // Require XEF helper class
 require_once JPATH_LIBRARIES . '/xef/xef.php';
 
+
+
+if(JVERSION<4){
+    require_once JPATH_SITE.'/components/com_content/helpers/route.php';
+}
+
+use Joomla\CMS\Access\Access;
+use Joomla\Utilities\ArrayHelper;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Router\Route;
+use Joomla\Component\Content\Site\Helper;
+use Joomla\Component\Content\Site\Helper\RouteHelper;
+use Joomla\CMS\Component\ComponentHelper;
+
+
+
 // Require Content router
-require_once JPATH_SITE.'/components/com_content/helpers/route.php';
+
 
 class XEFSourceJoomla extends XEFHelper
 {
-
     public function getItems()
     {
         jimport('joomla.application.component.model');
-        $app = JFactory::getApplication('site', array(), 'J');
 
+        if(JVERSION<4){
+            $app = JFactory::getApplication('site', array(), 'J');
+
+        }
+        else{
+            $app = Factory::getApplication('site', array(), 'J');
+        }
+
+        
+        if(JVERSION<4){
         // Get the dbo
         $db = JFactory::getDbo();
+        }
+        else{
+        $db = Factory::getDbo();
+
+        }
 
         // Get an instance of the generic articles model
         if(XEF_JVERSION == '25')
@@ -47,8 +78,15 @@ class XEFSourceJoomla extends XEFHelper
         $model->setState('filter.published', 1);
 
         // Access filter
+        if(JVERSION<4){
         $access = !JComponentHelper::getParams('com_content')->get('show_noauth');
         $authorised = JAccess::getAuthorisedViewLevels(JFactory::getUser()->get('id'));
+        }
+        else{
+        $access = !ComponentHelper::getParams('com_content')->get('show_noauth');
+        $authorised = Access::getAuthorisedViewLevels(Factory::getUser()->get('id'));
+
+        }
         $model->setState('filter.access', $access);
 
         // Category filter
@@ -64,8 +102,15 @@ class XEFSourceJoomla extends XEFHelper
 
         $model->setState( 'filter.category_id', $catid );
 
+
         // User filter
+        if(JVERSION<4){
         $userId = JFactory::getUser()->get('id');
+        }
+        else{
+        $userId = Factory::getUser()->get('id');
+        }
+
         switch ($this->get('jom_user_id'))
         {
             case 'by_me':
@@ -110,7 +155,14 @@ class XEFSourceJoomla extends XEFHelper
                'hits_dsc' => 'a.hits'
        );
 
+       if(JVERSION<4){
         $ordering = JArrayHelper::getValue($order_map, $this->get('jom_ordering'), 'a.publish_up');
+       }
+       else
+       {
+        $ordering = ArrayHelper::getValue($order_map, $this->get('jom_ordering'), 'a.publish_up');   
+       }
+        
         $dir = 'DESC';
 
         $model->setState('list.ordering', $ordering);
@@ -127,9 +179,16 @@ class XEFSourceJoomla extends XEFHelper
 
     public function getLink($item)
     {
+        if(JVERSION<4){
         $access = !JComponentHelper::getParams('com_content')->get('show_noauth');
-        $authorised = JAccess::getAuthorisedViewLevels(JFactory::getUser()->get('id'));
 
+        $authorised = JAccess::getAuthorisedViewLevels(JFactory::getUser()->get('id'));
+        }
+        else{
+        $access = !ComponentHelper::getParams('com_content')->get('show_noauth');
+
+        $authorised = Access::getAuthorisedViewLevels(Factory::getUser()->get('id'));
+        }
         $link = '';
 
         $item->slug = $item->id.':'.$item->alias;
@@ -138,10 +197,20 @@ class XEFSourceJoomla extends XEFHelper
         if ($access || in_array($item->access, $authorised))
         {
             // We know that user has the privilege to view the article
-            $link = JRoute::_( ContentHelperRoute::getArticleRoute($item->slug, $item->catslug) . $this->getMenuItemId() );
+            if(JVERSION<4){
+                $link = JRoute::_( ContentHelperRoute::getArticleRoute($item->slug, $item->catslug) . $this->getMenuItemId() );
+            }
+            else{
+            $link = Route::_( RouteHelper::getArticleRoute($item->slug, $item->catslug) . $this->getMenuItemId() );
+            }
         }
         else {
+            if(JVERSION<4){
             $link = JRoute::_('index.php?option=com_users&view=login');
+            }
+            else {
+            $link = Route::_('index.php?option=com_users&view=login');
+            }
         }
 
         return $link;
@@ -154,7 +223,12 @@ class XEFSourceJoomla extends XEFHelper
 
     public function getCategoryLink($item)
     {
+        if(JVERSION<4){
         return JRoute::_( ContentHelperRoute::getCategoryRoute($item->catid) . $this->getMenuItemId() );
+        }
+        else{
+        return Route::_( RouteHelper::getCategoryRoute($item->catid) . $this->getMenuItemId() );
+        }
     }
 
     public function getImage($item)

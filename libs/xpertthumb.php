@@ -32,12 +32,13 @@ class XpertThumb extends JImage
      */
     public function __construct($source = null)
     {
-
         // Determine which image types are supported by GD, but only once.
         if (!isset(self::$formats[IMAGETYPE_JPEG]))
         {
+            // echo $source; die;
             $info = gd_info();
-            self::$formats[IMAGETYPE_JPEG] = ($info['JPEG Support']) ? true : ($info['JPG Support']) ? true :false;
+
+            self::$formats[IMAGETYPE_JPEG] = ($info['JPEG Support'] ? true : $info['JPG Support']) ? true :false;
             self::$formats[IMAGETYPE_PNG] = ($info['PNG Support']) ? true : false;
             self::$formats[IMAGETYPE_GIF] = ($info['GIF Read Support']) ? true : false;
         }
